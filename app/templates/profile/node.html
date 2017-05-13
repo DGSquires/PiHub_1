@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Development PiHub: Access Control{% endblock %}
+
+{% block page_content %}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="card">
+            <h2 class="card-header">Access Point Information</h2>
+            <div class="card-block">
+                <ul class="list-group">
+                    <li class="list-group-item">Name: {{node['name']}}</li>
+                    <li class="list-group-item">IP_Address: {{node['ip_address']}}</li>
+                    <li class="list-group-item">Access Time: {{ node['dat_start'] }} - {{ node['dat_end'] }}</li>
+                    {% if node['is_open'] %}
+                    <li class="list-group-item">Current State: LOCKED</li>
+                    {% else %}
+                    <li class="list-group-item">Current State: UNLOCKED</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div><br></div>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="card">
+            <h2 class="card-header">Connected Users</h2>
+            <div class="card-block">
+                <ul class="list-group">
+                    {% for user in users %}
+                    <li class="list-group-item">{{ user['first_name'] }} {{user['last_name'] }}</li>
+                    {% endfor %}
+                </ul><br>
+                <a href="{{ url_for('profile.add_users',id=node['id']) }}" class="btn btn-primary" style="font-size: 2rem;">Add User</a>
+                <span>
+                    <a href="{{ url_for('profile.remove_users',id=node['id']) }}"class="btn btn-danger" style="font-size: 2rem;">Remove User</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

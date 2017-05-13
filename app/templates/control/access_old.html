@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Development PiHub: Access Control{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Access Control</h1>
+</div>
+
+{% for node in node_list %}
+<form method = "POST">
+    <div class="col-md-4">
+        <input type="hidden" name="node_name" value="{{ node['name'] }}">
+        <br>{{ node['name'] }}<br>
+        <a href="{{ node_config }}">Configuration</a><br>
+        <div class="btn-group" data-toggle="buttons">
+            {% if node['is_open'] %}
+                <label class="btn btn-primary active">
+                    <input type="radio" name="is_open" id="option1" value = True autocomplete="off" checked> Unlocked
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" name="is_open" id="option2" value = False autocomplete="off"> Locked
+                </label><br>
+            {% else %}
+                <label class="btn btn-primary">
+                    <input type="radio" name="is_open" id="option3" value = True autocomplete="off" checked> Unlocked
+                </label>
+                <label class="btn btn-primary active">
+                    <input type="radio" name="is_open" id="option4" value = False autocomplete="off"> Locked
+                </label>
+            {% endif %}
+            <div><br><input type="submit" value="Submit"></div>
+        </div>
+    </div>
+</form>
+{% endfor %}
+<div class="col-md-12">
+    <br><br>
+    {{ wtf.quick_form(form) }}
+</div>
+{% endblock %}
+
+<!-- JAVASCRIPT FUNCTIONS -->
+<!--
+$('input[name=nodeState]').change(function(){
+     $('is_open').submit();});
+-->

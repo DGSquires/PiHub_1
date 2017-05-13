@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{network}} - Unconfirmed Profile{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>
+        {{ current_user.first_name }} {{ current_user.last_name }}
+    </h1>
+    <h3>You have not confirmed your account yet.</h3>
+    <p>
+        Before you can access this network you must confirm your account.
+        Check your inbox, you should have received an email with a confirmation link.
+    </p>
+    <p>
+        To resend confirmation email
+        <a href="{{ url_for('auth.resend_confirmation') }}">Click here</a>
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{{ user.first_name|capitalize }} {{user.last_name|capitalize}}
+
+To confirm connection to {{ network }}
+
+Click the following link
+{{ url_for('auth.confirm', token=token, _external=True) }}
+
+Note: replies to this email address are not monitored
+
